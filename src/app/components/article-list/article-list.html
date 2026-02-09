@@ -1,0 +1,10 @@
+<h3>Liste des Articles</h3>
+<div>
+    @for (article of articles; track article.id) {
+        <div class="article-item">
+            <h2>{{ article.title }}</h2>
+            <p>{{ article.content }}</p>
+            <button (click)="deleteArticle(article.id)">Supprimer</button>
+        </div>
+    }
+</div>
