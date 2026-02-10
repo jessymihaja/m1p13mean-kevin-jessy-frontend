@@ -1,0 +1,12 @@
+@use '@angular/material' as mat;
+
+/* Import existing global CSS to preserve variables and utilities */
+@import './styles.css';
+
+/* Material Datepicker overrides using app colors */
+:root {
+  @include mat.datepicker-overrides((
+    calendar-body-label-text-color: #667eea,
+    calendar-container-background-color: #f3f6f9,
+  ));
+}

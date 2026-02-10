@@ -8,32 +8,6 @@
   overflow: hidden;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-
-/* Fond dégradé avec animation */
-.gradient-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
-  background-size: 400% 400%;
-  animation: gradient 15s ease infinite;
-  z-index: -1;
-}
-
-@keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
 /* Wrapper principal */
 .login-wrapper {
   width: 100%;
@@ -293,4 +267,28 @@ form {
 
 ::ng-deep .mat-mdc-icon-button {
   color: #667eea !important;
+}
+
+/* Use the site's muted gray for input text and softer placeholders */
+::ng-deep .mat-mdc-text-field-input {
+  color: var(--muted, #6b6f76) !important;
+  caret-color: var(--primary, #667eea) !important;
+}
+
+::ng-deep .mat-mdc-text-field-input::placeholder,
+::ng-deep input::placeholder {
+  color: rgba(107,111,118,0.55) !important;
+}
+
+/* Softer label color to match theme */
+::ng-deep .mat-mdc-form-field-label,
+::ng-deep .mdc-floating-label,
+::ng-deep .mat-mdc-form-field .mdc-floating-label {
+  color: var(--muted, #6b6f76) !important;
+  opacity: 0.95 !important;
+}
+
+/* Ensure icons keep the primary accent while text is muted */
+::ng-deep .mat-mdc-icon-button {
+  color: var(--primary, #667eea) !important;
 }

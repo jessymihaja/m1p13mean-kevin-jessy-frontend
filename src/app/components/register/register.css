@@ -1,0 +1,105 @@
+/* Simple styles matching login.css */
+.register-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+}
+
+.register-wrapper {
+	width: 100%;
+	max-width: 480px;
+	z-index: 1;
+	padding: 20px;
+}
+
+.register-header {
+	text-align: center;
+	margin-bottom: 28px;
+	color: #222;
+}
+.shopping-mall-icon {
+  font-size: 60px;
+  margin-bottom: 15px;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.register-header h2 {
+	margin: 0;
+	font-size: 26px;
+	font-weight: 600;
+    color: #ffffff;
+}
+
+.register-header .muted { color: var(--muted, #6b6f76); margin-top:6px }
+
+.register-card {
+	border-radius: 14px;
+	box-shadow: 0 20px 60px rgba(0,0,0,0.06);
+	backdrop-filter: blur(6px);
+	background: var(--card-bg, #fff);
+	padding: 36px;
+}
+
+form { display:flex; flex-direction:column; gap:18px }
+.full-width { width:100% }
+
+.two-cols { display:flex; gap:12px }
+.two-cols .col { flex:1 }
+
+/* Material inputs - simple and consistent */
+::ng-deep .mat-mdc-form-field { width:100% }
+
+::ng-deep .mat-mdc-text-field-wrapper {
+	border-radius: 10px !important;
+	border: 1px solid rgba(16,24,32,0.06) !important;
+	padding: 2px 10px !important;
+	background: transparent !important;
+}
+
+::ng-deep .mat-mdc-text-field-input {
+	color: var(--muted, #6b6f76) !important;
+	font-size: 15px !important;
+}
+
+::ng-deep .mat-mdc-form-field-label,
+::ng-deep .mdc-floating-label { color: var(--muted, #6b6f76) !important }
+
+::ng-deep .mat-mdc-form-field.mat-focused .mat-mdc-form-field-outline { color: var(--primary, #667eea) !important }
+::ng-deep .mat-mdc-icon-button { color: var(--primary, #667eea) !important }
+
+/* Button */
+.register-button {
+	padding: 12px 20px !important;
+	height:44px !important;
+	border-radius: 8px !important;
+	background: linear-gradient(135deg, var(--primary,#667eea) 0%, #764ba2 100%) !important;
+	font-weight:600 !important;
+	color: white !important;
+}
+
+@media (max-width: 600px) {
+	.register-wrapper { max-width: 100% }
+	.two-cols { flex-direction: column }
+}
+
+/* mat-select panel (dropdown) background */
+::ng-deep .mat-mdc-select-panel,
+::ng-deep .mat-mdc-select-panel .mat-mdc-list {
+	background: #ffffff !important;
+}
+
+/* keep input element transparent (wrapper provides bg) but ensure visible text */
+::ng-deep input[type="date"].mat-mdc-text-field-input {
+	background: transparent !important;
+	color: var(--muted, #6b6f76) !important;
+}

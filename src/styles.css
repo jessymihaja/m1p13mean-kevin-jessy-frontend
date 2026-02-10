@@ -1,1 +1,45 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global light theme: chill white / light gray */
+:root {
+	--bg: #4facfe;
+	--card-bg: #ffffff;
+	--muted: #6b6f76;
+	--primary: #667eea; /* keep primary accent */
+}
+
+html, body {
+	height: 100%;
+	background-color: var(--bg);
+	color: #222;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+/* Make mat-cards and app containers light */
+mat-card, .login-card, .card {
+	background: var(--card-bg) !important;
+	color: #222 !important;
+	box-shadow: 0 6px 20px rgba(30,30,30,0.06) !important;
+}
+
+/* Muted text */
+.muted, .text-muted {
+	color: var(--muted);
+}
+
+/* Links */
+a {
+	color: var(--primary);
+}
+
+/* Ensure body content is centered nicely */
+#root, app-root {
+	min-height: 100%;
+	display: block;
+}
+
+/* Small utility spacing */
+.px-1 { padding-left:8px; padding-right:8px; }
+.py-1 { padding-top:8px; padding-bottom:8px; }
+
+/* End of global theme */
