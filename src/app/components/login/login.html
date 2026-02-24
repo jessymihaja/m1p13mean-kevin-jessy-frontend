@@ -43,6 +43,16 @@
             </mat-error>
           </mat-form-field>
 
+          <!-- Champ Rôle (NOUVEAU) -->
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Sélectionner un rôle</mat-label>
+            <mat-select formControlName="role">
+              <mat-option value="admin">Administrateur</mat-option>
+              <mat-option value="magasin">Magasin</mat-option>
+              <mat-option value="client">Client</mat-option>
+            </mat-select>
+          </mat-form-field>
+
           <!-- Se souvenir de moi -->
           <mat-checkbox formControlName="rememberMe" class="remember-me">
             Se souvenir de moi

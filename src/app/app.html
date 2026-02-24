@@ -1,1 +1,9 @@
-<router-outlet></router-outlet>
+<div class="app-container">
+  <!-- Sidebar visible seulement si l'utilisateur est authentifié -->
+  <app-sidebar *ngIf="authService.isAuthenticated()"></app-sidebar>
+
+  <!-- Contenu principal -->
+  <div class="main-content" [class.full-width]="!authService.isAuthenticated()">
+    <router-outlet></router-outlet>
+  </div>
+</div>

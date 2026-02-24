@@ -7,6 +7,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
+import { Router } from '@angular/router';
+import { AuthService, UserRole } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +23,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatInputModule,
     MatButtonModule,
     MatCheckboxModule,
-    MatIconModule
+    MatIconModule,
+    MatSelectModule
   ],
   templateUrl: './login.html',
   styleUrls: ['./login.css']
@@ -29,11 +33,22 @@ export class LoginComponent {
   loginForm: FormGroup;
   hidePassword = true;
   isLoading = false;
+  roles: UserRole[] = ['admin', 'magasin', 'client'];
+  roleLabels = {
+    'admin': 'Administrateur',
+    'magasin': 'Magasin',
+    'client': 'Client'
+  };
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
+      role: ['client', Validators.required],
       rememberMe: [false]
     });
   }
@@ -45,12 +60,18 @@ export class LoginComponent {
   onSubmit() {
     if (this.loginForm.valid) {
       this.isLoading = true;
-      console.log('Form Value:', this.loginForm.value);
+      const { email, password, role, rememberMe } = this.loginForm.value;
+      
+      console.log('Login avec:', { email, role });
+      
+      // Définir le rôle dans le service
+      this.authService.setUserRole(role);
+      
       // Simuler un délai de connexion
       setTimeout(() => {
         this.isLoading = false;
-        alert('Connexion réussie!');
-      }, 2000);
+        this.router.navigate(['/dashboard']);
+      }, 500);
     }
   }
 

@@ -1,0 +1,154 @@
+.dashboard-container {
+  padding: 30px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.dashboard-header {
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.dashboard-header h1 {
+  margin: 0;
+  color: #333;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.dashboard-header p {
+  margin: 8px 0 0;
+  color: #666;
+  font-size: 14px;
+}
+
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.stat-card {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.admin-card {
+  border-left: 4px solid #667eea;
+}
+
+.shop-card {
+  border-left: 4px solid #f74c7b;
+}
+
+.client-card {
+  border-left: 4px solid #00d4ff;
+}
+
+.stat-icon {
+  font-size: 32px;
+  min-width: 50px;
+  text-align: center;
+}
+
+.stat-content {
+  flex: 1;
+}
+
+.stat-label {
+  color: #888;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.stat-value {
+  color: #333;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+/* Content Area */
+.content-area {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.role-content h2 {
+  margin: 0 0 20px;
+  color: #333;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* Quick Links */
+.quick-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.quick-link-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  text-decoration: none;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  font-size: 14px;
+  gap: 8px;
+}
+
+.quick-link-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 15px;
+  }
+
+  .dashboard-header h1 {
+    font-size: 22px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+  }
+
+  .stat-card {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .content-area {
+    padding: 15px;
+  }
+}

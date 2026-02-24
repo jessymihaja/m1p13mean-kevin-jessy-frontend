@@ -1,0 +1,58 @@
+<aside class="sidebar" [class.collapsed]="isCollapsed">
+  <!-- Header du Sidebar -->
+  <div class="sidebar-header">
+    <div class="sidebar-logo">
+      <span class="logo-icon">📦</span>
+      <span class="logo-text" *ngIf="!isCollapsed">E-Commerce</span>
+    </div>
+    <button class="toggle-btn" (click)="toggleSidebar()" title="Réduire/Agrandir">
+      <span>☰</span>
+    </button>
+  </div>
+
+  <!-- Menu Items -->
+  <nav class="sidebar-menu">
+    <div *ngFor="let item of menuItems" class="menu-item-group">
+      <!-- Item sans sous-éléments -->
+      <a *ngIf="!item.subItems" 
+         [routerLink]="item.route" 
+         routerLinkActive="active" 
+         class="menu-link">
+        <span class="menu-icon">{{ item.icon }}</span>
+        <span class="menu-label" *ngIf="!isCollapsed">{{ item.label }}</span>
+      </a>
+
+      <!-- Item avec sous-éléments -->
+      <div *ngIf="item.subItems" class="menu-item-with-children">
+        <button class="menu-link menu-parent" 
+                (click)="toggleExpand(item.label)" 
+                [class.expanded]="isExpanded(item.label)">
+          <span class="menu-icon">{{ item.icon }}</span>
+          <span class="menu-label" *ngIf="!isCollapsed">{{ item.label }}</span>
+          <span class="expand-icon" *ngIf="!isCollapsed && item.subItems">
+            {{ isExpanded(item.label) ? '▼' : '▶' }}
+          </span>
+        </button>
+
+        <!-- Sous-éléments -->
+        <div class="submenu" *ngIf="isExpanded(item.label) && !isCollapsed">
+          <a *ngFor="let subItem of item.subItems" 
+             [routerLink]="subItem.route" 
+             routerLinkActive="active" 
+             class="submenu-link">
+            <span class="submenu-icon">{{ subItem.icon }}</span>
+            <span class="submenu-label">{{ subItem.label }}</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Footer du Sidebar -->
+  <div class="sidebar-footer">
+    <button class="logout-btn" (click)="logout()" title="Déconnexion">
+      <span class="logout-icon">🚪</span>
+      <span class="logout-label" *ngIf="!isCollapsed">Déconnexion</span>
+    </button>
+  </div>
+</aside>

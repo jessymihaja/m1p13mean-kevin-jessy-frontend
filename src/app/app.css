@@ -1,0 +1,33 @@
+.app-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+.main-content {
+  flex: 1;
+  margin-left: 250px;
+  overflow-y: auto;
+  background-color: #f5f7fa;
+  transition: margin-left 0.3s ease;
+}
+
+.main-content.full-width {
+  margin-left: 0;
+}
+
+/* Responsive pour tablettes et mobiles */
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+  }
+
+  .sidebar {
+    width: 80px;
+  }
+
+  .sidebar.collapsed {
+    width: 0;
+    display: none;
+  }
+}

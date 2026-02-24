@@ -1,0 +1,242 @@
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  transition: width 0.3s ease;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+.sidebar.collapsed {
+  width: 80px;
+}
+
+/* Header */
+.sidebar-header {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  min-height: 70px;
+}
+
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.sidebar-logo:hover {
+  transform: scale(1.05);
+}
+
+.logo-icon {
+  font-size: 24px;
+}
+
+.logo-text {
+  font-weight: 700;
+  font-size: 16px;
+  white-space: nowrap;
+}
+
+.toggle-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 18px;
+  transition: all 0.3s ease;
+}
+
+.toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: rotate(90deg);
+}
+
+/* Menu */
+.sidebar-menu {
+  flex: 1;
+  padding: 20px 0;
+  overflow-y: auto;
+}
+
+.menu-item-group {
+  margin-bottom: 5px;
+}
+
+.menu-link {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px 20px;
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: none;
+  background: none;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.menu-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  padding-left: 25px;
+}
+
+.menu-link.active {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border-left: 4px solid #ffd700;
+  padding-left: 16px;
+}
+
+.menu-icon {
+  min-width: 24px;
+  text-align: center;
+  font-size: 18px;
+}
+
+.menu-label {
+  white-space: nowrap;
+}
+
+.menu-parent {
+  justify-content: space-between;
+}
+
+.expand-icon {
+  margin-left: auto;
+  transition: transform 0.3s ease;
+}
+
+/* Sous-menu */
+.submenu {
+  background: rgba(0, 0, 0, 0.1);
+  padding: 5px 0;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.submenu-link {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px 20px 10px 50px;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 13px;
+}
+
+.submenu-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  padding-left: 55px;
+}
+
+.submenu-link.active {
+  color: #ffd700;
+  background: rgba(255, 215, 0, 0.1);
+}
+
+.submenu-icon {
+  min-width: 20px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.submenu-label {
+  white-space: nowrap;
+}
+
+/* Footer */
+.sidebar-footer {
+  padding: 15px 20px;
+  border-top: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+  padding: 12px 15px;
+  background: rgba(255, 0, 0, 0.2);
+  border: 1px solid rgba(255, 0, 0, 0.3);
+  color: rgba(255, 255, 255, 0.9);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.logout-btn:hover {
+  background: rgba(255, 0, 0, 0.4);
+  border-color: rgba(255, 0, 0, 0.6);
+  color: white;
+}
+
+.logout-icon {
+  font-size: 18px;
+}
+
+.logout-label {
+  white-space: nowrap;
+}
+
+/* Responsive */
+.sidebar.collapsed .submenu {
+  display: none;
+}
+
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Mode sombre optionnel */
+@media (prefers-color-scheme: dark) {
+  .sidebar {
+    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.3);
+  }
+}

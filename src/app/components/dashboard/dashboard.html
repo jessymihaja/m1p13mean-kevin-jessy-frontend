@@ -1,0 +1,80 @@
+<div class="dashboard-container">
+  <!-- Header -->
+  <div class="dashboard-header">
+    <div>
+      <h1>
+        <span *ngIf="isAdmin">📊 Tableau de Bord Admin</span>
+        <span *ngIf="isShop">🏪 Tableau de Bord Magasin</span>
+        <span *ngIf="isClient">🏠 Accueil</span>
+      </h1>
+      <p>Bienvenue dans votre espace</p>
+    </div>
+  </div>
+
+  <!-- Stats Cards -->
+  <div class="stats-grid">
+    <ng-container *ngIf="isAdmin">
+      <div *ngFor="let stat of adminStats" class="stat-card admin-card">
+        <div class="stat-icon">{{ stat.icon }}</div>
+        <div class="stat-content">
+          <div class="stat-label">{{ stat.label }}</div>
+          <div class="stat-value">{{ stat.value }}</div>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="isShop">
+      <div *ngFor="let stat of shopStats" class="stat-card shop-card">
+        <div class="stat-icon">{{ stat.icon }}</div>
+        <div class="stat-content">
+          <div class="stat-label">{{ stat.label }}</div>
+          <div class="stat-value">{{ stat.value }}</div>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="isClient">
+      <div *ngFor="let stat of clientStats" class="stat-card client-card">
+        <div class="stat-icon">{{ stat.icon }}</div>
+        <div class="stat-content">
+          <div class="stat-label">{{ stat.label }}</div>
+          <div class="stat-value">{{ stat.value }}</div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+
+  <!-- Content Area -->
+  <div class="content-area">
+    <!-- Admin Content -->
+    <div *ngIf="isAdmin" class="role-content">
+      <h2>Gestion du système</h2>
+      <div class="quick-links">
+        <a href="/admin/dashboard" class="quick-link-btn">📊 Tableau de bord</a>
+        <a href="/admin/shops" class="quick-link-btn">🏪 Boutiques</a>
+        <a href="/admin/accounts" class="quick-link-btn">👥 Comptes</a>
+        <a href="/admin/categories" class="quick-link-btn">📂 Catégories</a>
+      </div>
+    </div>
+
+    <!-- Magasin Content -->
+    <div *ngIf="isShop" class="role-content">
+      <h2>Gestion de votre magasin</h2>
+      <div class="quick-links">
+        <a href="/shop/profile" class="quick-link-btn">👤 Profil</a>
+        <a href="/shop/articles" class="quick-link-btn">📦 Articles</a>
+        <a href="/shop/orders" class="quick-link-btn">📋 Commandes</a>
+      </div>
+    </div>
+
+    <!-- Client Content -->
+    <div *ngIf="isClient" class="role-content">
+      <h2>Explorez nos magasins</h2>
+      <div class="quick-links">
+        <a href="/client/search" class="quick-link-btn">🔍 Rechercher</a>
+        <a href="/client/shops" class="quick-link-btn">🏪 Magasins</a>
+        <a href="/client/orders-history" class="quick-link-btn">📋 Mes commandes</a>
+      </div>
+    </div>
+  </div>
+</div>
