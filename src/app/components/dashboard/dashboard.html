@@ -70,6 +70,33 @@
     <!-- Client Content -->
     <div *ngIf="isClient" class="role-content">
       <h2>Explorez nos magasins</h2>
+
+      <!-- promotions placeholder above search/filter -->
+      <div class="promo-bar">
+        <span>🔥 Produits en promotion : <strong>aucune promotion pour le moment</strong></span>
+      </div>
+
+      <!-- temporary search and sort for article list -->
+      <div class="search-filter">
+        <input type="text" [(ngModel)]="searchText" placeholder="Rechercher des articles..." />
+        <select [(ngModel)]="sortOption">
+          <option value="recent">Plus récent</option>
+          <option value="best">Mieux voté</option>
+          <option value="old">Moins récent</option>
+        </select>
+      </div>
+
+      <div class="article-list">
+        <div *ngFor="let article of filteredArticles()" class="article-card">
+          <h3>{{ article.title }}</h3>
+          <p>{{ article.description }}</p>
+          <small>{{ article.date | date }}</small>
+        </div>
+        <div *ngIf="filteredArticles().length === 0" class="no-results">
+          Aucun article trouvé.
+        </div>
+      </div>
+
       <div class="quick-links">
         <a href="/client/search" class="quick-link-btn">🔍 Rechercher</a>
         <a href="/client/shops" class="quick-link-btn">🏪 Magasins</a>
