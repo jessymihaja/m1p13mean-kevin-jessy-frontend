@@ -1,0 +1,59 @@
+import { Injectable, Inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ShopService {
+  private apiBase: string;
+  constructor(private http: HttpClient, @Inject('API_URL') apiUrl: string) {
+    this.apiBase = apiUrl;
+  }
+
+  // données de mock pour client (et admin si besoin).
+  // on fournit un ensemble de boutiques avec descriptions plus longues,
+  // logos fictifs et statut d'approbation. Utile pour affichage stylé.
+  getMockShops(): Observable<any> {
+    const fake = [
+      {
+        _id: '1',
+        name: 'Boutique A',
+        description: 'Grande sélection de vêtements pour toute la famille, avec des offres permanentes et des nouveautés chaque semaine.',
+        approved: false,
+        logo: ''
+      },
+      {
+        _id: '2',
+        name: 'Boutique B',
+        description: 'Spécialiste des accessoires électroniques haut de gamme : câbles, chargeurs, casques et plus encore.',
+        approved: true,
+        logo: ''
+      },
+      {
+        _id: '3',
+        name: 'Boutique C',
+        description: 'Librairie indépendante avec un vaste choix de romans, BD et livres pour enfants.',
+        approved: true,
+        logo: ''
+      }
+    ];
+    return of(fake);
+  }
+
+  getShops(): Observable<any> {
+    return this.http.get<any>(`${this.apiBase}/shops`);
+  }
+
+  addShop(data: any): Observable<any> {
+    return this.http.post<any>(`${this.apiBase}/shops`, data);
+  }
+
+  updateShop(shopId: string, data: any): Observable<any> {
+    return this.http.put<any>(`${this.apiBase}/shops/${shopId}`, data);
+  }
+
+  deleteShop(shopId: string): Observable<any> {
+    return this.http.delete<any>(`${this.apiBase}/shops/${shopId}`);
+  }
+}

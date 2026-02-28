@@ -58,6 +58,11 @@ export class SidebarComponent implements OnInit {
       route: '/shop/articles'
     },
     {
+      label: 'Inventaire',
+      icon: 'inventory_2',
+      route: '/shop/inventory'
+    },
+    {
       label: 'Gestion des commandes',
       icon: 'shopping_cart',
       route: '/shop/orders'

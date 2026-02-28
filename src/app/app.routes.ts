@@ -3,6 +3,9 @@ import { ArticleList } from './components/article-list/article-list';
 import { LoginComponent } from './components/login/login';
 import { RegisterComponent } from './components/register/register';
 import { DashboardComponent } from './components/dashboard/dashboard';
+import { InventoryComponent } from './components/inventory/inventory';
+import { ShopAdminComponent } from './components/shop-admin/shop-admin';
+import { ShopListComponent } from './components/shop-list/shop-list';
 
 export const routes: Routes = [
   // Auth routes
@@ -16,18 +19,19 @@ export const routes: Routes = [
 
   // Admin routes
   { path: 'admin/dashboard', component: DashboardComponent },
-  { path: 'admin/shops', component: DashboardComponent },
+  { path: 'admin/shops', component: ShopAdminComponent },
   { path: 'admin/accounts', component: DashboardComponent },
   { path: 'admin/categories', component: DashboardComponent },
 
   // Magasin (Shop) routes
   { path: 'shop/profile', component: DashboardComponent },
   { path: 'shop/articles', component: DashboardComponent },
+  { path: 'shop/inventory', component: InventoryComponent },
   { path: 'shop/orders', component: DashboardComponent },
 
   // Client routes
   { path: 'client/home', component: DashboardComponent },
   { path: 'client/search', component: DashboardComponent },
-  { path: 'client/shops', component: DashboardComponent },
+  { path: 'client/shops', component: ShopListComponent },
   { path: 'client/orders-history', component: DashboardComponent }
 ];

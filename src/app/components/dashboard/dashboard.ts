@@ -1,20 +1,26 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; // needed for ngModel bindings
+import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, MatIconModule],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css'
 })
 export class DashboardComponent {
   userRole: string | null = null;
+  showCartPopup: boolean = false;
 
   constructor(private authService: AuthService) {
     this.userRole = this.authService.getUserRole();
+  }
+
+  toggleCart(): void {
+    this.showCartPopup = !this.showCartPopup;
   }
 
   get isAdmin(): boolean {

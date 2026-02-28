@@ -1,0 +1,68 @@
+.shop-list-container {
+  padding: 1rem 2rem;
+}
+
+.shop-search input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.shop-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.shop-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%);
+  border: 2px solid #007bff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem;
+  min-height: 100px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.shop-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+}
+
+.shop-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.shop-image {
+  width: 60px;
+  height: 60px;
+  background: #ddd;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.shop-info h4 {
+  margin: 0 0 0.25rem;
+  font-size: 16px;
+}
+
+.shop-info p {
+  margin: 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.no-results {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  grid-column: 1 / -1;
+}

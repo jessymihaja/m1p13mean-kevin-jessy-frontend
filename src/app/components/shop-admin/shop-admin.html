@@ -1,0 +1,29 @@
+<div class="shop-container">
+  <h3>Gestion des boutiques</h3>
+  <div class="shop-controls">
+    <input type="text" [(ngModel)]="searchText" placeholder="Rechercher une boutique...">
+    <button (click)="addShop()">Ajouter une boutique</button>
+  </div>
+  <table class="shop-table">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Description</th>
+        <th>Approuvée</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let s of filteredShops()">
+        <td>{{ s.name }}</td>
+        <td>{{ s.description }}</td>
+        <td>{{ s.approved ? '✔️' : '✖️' }}</td>
+        <td>
+          <button class="edit-btn" (click)="editShop(s)">Modifier</button>
+          <button class="delete-btn" (click)="deleteShop(s._id)">Supprimer</button>
+          <button class="activate-btn" (click)="toggleApprove(s)">{{ s.approved ? 'Désactiver' : 'Activer' }}</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

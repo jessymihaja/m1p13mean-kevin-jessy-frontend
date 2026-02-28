@@ -1,0 +1,18 @@
+<div class="shop-list-container">
+  <h3>Magasins</h3>
+  <div class="shop-search">
+    <input type="text" [(ngModel)]="searchText" placeholder="Rechercher un magasin..." />
+  </div>
+  <div class="shop-cards">
+    <div *ngFor="let s of filteredShops()" class="shop-card">
+      <div class="shop-image">📷</div>
+      <div class="shop-info">
+        <h4>{{ s.name }}</h4>
+        <p>{{ s.description }}</p>
+      </div>
+    </div>
+    <div *ngIf="filteredShops().length === 0" class="no-results">
+      Aucun magasin trouvé.
+    </div>
+  </div>
+</div>
