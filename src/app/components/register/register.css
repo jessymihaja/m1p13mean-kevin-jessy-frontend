@@ -4,6 +4,7 @@
 	align-items: center;
 	justify-content: center;
 	min-height: 100vh;
+	background-color: var(--primary);
 }
 
 .register-wrapper {
@@ -16,7 +17,7 @@
 .register-header {
 	text-align: center;
 	margin-bottom: 28px;
-	color: #222;
+	color: white;
 }
 .shopping-mall-icon {
   font-size: 60px;
@@ -40,7 +41,9 @@
     color: #ffffff;
 }
 
-.register-header .muted { color: var(--muted, #6b6f76); margin-top:6px }
+.muted {
+	color: white;
+}
 
 .register-card {
 	border-radius: 14px;
@@ -102,4 +105,17 @@ form { display:flex; flex-direction:column; gap:18px }
 ::ng-deep input[type="date"].mat-mdc-text-field-input {
 	background: transparent !important;
 	color: var(--muted, #6b6f76) !important;
+}
+.links-container {
+  margin-top: 20px;
+  text-align: center;
+}
+.link {
+  color: var(--primary, #667eea);
+  text-decoration: none;
+  font-size: 14px;
+}
+.link:hover {
+  color: #764ba2;
+  text-decoration: underline;
 }

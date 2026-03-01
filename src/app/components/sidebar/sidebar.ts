@@ -43,6 +43,11 @@ export class SidebarComponent implements OnInit {
       label: 'Gestion des catégories',
       icon: 'category',
       route: '/admin/categories'
+    },
+    {
+      label: 'Gestion des promotions',
+      icon: 'local_offer',
+      route: '/admin/promotions'
     }
   ];
 
@@ -51,11 +56,6 @@ export class SidebarComponent implements OnInit {
       label: 'Gestion du profil de magasin',
       icon: 'shop_2',
       route: '/shop/profile'
-    },
-    {
-      label: 'Gestion des articles',
-      icon: 'inventory',
-      route: '/shop/articles'
     },
     {
       label: 'Inventaire',

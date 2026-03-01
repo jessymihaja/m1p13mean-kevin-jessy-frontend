@@ -18,7 +18,6 @@
          [routerLink]="item.route" 
          routerLinkActive="active" 
          class="menu-link">
-        <span class="menu-icon">{{ item.icon }}</span>
         <span class="menu-label" *ngIf="!isCollapsed">{{ item.label }}</span>
       </a>
 
@@ -27,7 +26,6 @@
         <button class="menu-link menu-parent" 
                 (click)="toggleExpand(item.label)" 
                 [class.expanded]="isExpanded(item.label)">
-          <span class="menu-icon">{{ item.icon }}</span>
           <span class="menu-label" *ngIf="!isCollapsed">{{ item.label }}</span>
           <span class="expand-icon" *ngIf="!isCollapsed && item.subItems">
             {{ isExpanded(item.label) ? '▼' : '▶' }}
@@ -40,7 +38,6 @@
              [routerLink]="subItem.route" 
              routerLinkActive="active" 
              class="submenu-link">
-            <span class="submenu-icon">{{ subItem.icon }}</span>
             <span class="submenu-label">{{ subItem.label }}</span>
           </a>
         </div>

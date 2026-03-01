@@ -23,6 +23,7 @@ export const routes: Routes = [
   { path: 'admin/shops', component: ShopAdminComponent },
   { path: 'admin/accounts', component: DashboardComponent },
   { path: 'admin/categories', component: DashboardComponent },
+  { path: 'admin/promotions', component: DashboardComponent },
 
   // Magasin (Shop) routes
   { path: 'shop/profile', component: DashboardComponent },
