@@ -4,7 +4,15 @@
         <div class="article-item">
             <h2>{{ article.title }}</h2>
             <p>{{ article.content }}</p>
-            <button (click)="deleteArticle(article.id)">Supprimer</button>
+            <div class="article-actions">
+              <button mat-icon-button color="primary" title="Voir" (click)="viewArticle(article)">
+                <mat-icon>visibility</mat-icon>
+              </button>
+              <button mat-icon-button color="accent" title="Ajouter au panier" (click)="addToCart(article)">
+                <mat-icon>shopping_cart</mat-icon>
+              </button>
+              <button mat-button color="warn" (click)="deleteArticle(article.id)">Supprimer</button>
+            </div>
         </div>
     }
 </div>

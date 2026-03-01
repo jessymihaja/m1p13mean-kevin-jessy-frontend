@@ -1,0 +1,8 @@
+.dialog-actions {
+  margin-top: 16px;
+}
+
+mat-form-field {
+  display: block;
+  margin-bottom: 12px;
+}

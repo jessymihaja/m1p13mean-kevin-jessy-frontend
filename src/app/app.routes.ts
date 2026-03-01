@@ -4,6 +4,7 @@ import { LoginComponent } from './components/login/login';
 import { RegisterComponent } from './components/register/register';
 import { DashboardComponent } from './components/dashboard/dashboard';
 import { InventoryComponent } from './components/inventory/inventory';
+import { OrderComponent } from './components/order/order';
 import { ShopAdminComponent } from './components/shop-admin/shop-admin';
 import { ShopListComponent } from './components/shop-list/shop-list';
 
@@ -27,7 +28,7 @@ export const routes: Routes = [
   { path: 'shop/profile', component: DashboardComponent },
   { path: 'shop/articles', component: DashboardComponent },
   { path: 'shop/inventory', component: InventoryComponent },
-  { path: 'shop/orders', component: DashboardComponent },
+  { path: 'shop/orders', component: OrderComponent },
 
   // Client routes
   { path: 'client/home', component: DashboardComponent },

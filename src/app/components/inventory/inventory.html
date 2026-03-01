@@ -2,7 +2,7 @@
   <h3>Inventaire</h3>
   <div class="inventory-controls">
     <input type="text" [(ngModel)]="searchText" placeholder="Rechercher un produit...">
-    <button (click)="addProduct()">Ajouter un produit</button>
+    <button mat-raised-button color="primary" (click)="addProduct()">Ajouter un produit</button>
   </div>
   <table class="inventory-table">
   <thead>
@@ -21,6 +21,9 @@
       <td>{{ p.price | currency:'EUR' }}</td>
       <td>{{ p.category }}</td>
       <td>
+        <button class="promo-btn" mat-icon-button color="accent" title="Promouvoir" (click)="promoteProduct(p)">
+          <mat-icon>emoji_events</mat-icon>
+        </button>
         <button class="edit-btn" (click)="editProduct(p)">Modifier</button>
         <button class="delete-btn" (click)="deleteProduct(p._id)">Supprimer</button>
       </td>

@@ -31,3 +31,22 @@
     display: none;
   }
 }
+
+/* footer global */
+.app-footer {
+  background: #333;
+  color: #ccc;
+  text-align: center;
+  padding: 1rem 1rem;
+  position: relative; /* sit at page bottom rather than fixed */
+  width: 98.75%;
+  font-size: 0.85rem;
+  margin-top: 2rem;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+

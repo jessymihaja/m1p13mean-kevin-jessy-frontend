@@ -2,12 +2,13 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; // needed for ngModel bindings
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatIconModule],
+  imports: [CommonModule, FormsModule, MatIconModule, MatButtonModule],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css'
 })
@@ -90,5 +91,13 @@ export class DashboardComponent {
     }
 
     return list;
+  }
+
+  viewArticle(article: any): void {
+    alert(`Voir article : ${article.title}`);
+  }
+
+  addToCart(article: any): void {
+    alert(`Article ajouté au panier : ${article.title}`);
   }
 }

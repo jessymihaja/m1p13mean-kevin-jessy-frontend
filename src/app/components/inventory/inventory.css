@@ -59,6 +59,12 @@ h3 {
 .inventory-table button.edit-btn:hover {
   background-color: #e0a800;
 }
+.inventory-table button.promo-btn {
+  color: #ffc107;
+}
+.inventory-table button.promo-btn:hover {
+  background-color: rgba(255,193,7,0.1);
+}
 .inventory-table button.delete-btn {
   background-color: #dc3545;
   color: #fff;

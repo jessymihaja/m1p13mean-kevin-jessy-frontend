@@ -1,9 +1,13 @@
 import { Component,OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { Article } from '../../services/article';
 
 @Component({
   selector: 'app-article-list',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule, MatButtonModule, MatIconModule],
   templateUrl: './article-list.html',
   styleUrl: './article-list.css',
 })
@@ -33,6 +37,14 @@ export class ArticleList implements OnInit
         console.error('Error deleting article:', error);
       }
     );
+  }
+
+  viewArticle(article: any): void {
+    alert(`Voir article ${article.id}`);
+  }
+
+  addToCart(article: any): void {
+    alert(`Ajouter au panier : ${article.id}`);
   }
 
 }

@@ -1,0 +1,35 @@
+<h2 mat-dialog-title>Ajouter un produit</h2>
+<div mat-dialog-content>
+  <form #form="ngForm">
+    <mat-form-field appearance="fill" style="width: 100%;">
+      <mat-label>Nom</mat-label>
+      <input matInput name="name" [(ngModel)]="product.name" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" style="width: 100%;">
+      <mat-label>Description</mat-label>
+      <textarea matInput name="description" [(ngModel)]="product.description"></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" style="width: 100%;">
+      <mat-label>Prix</mat-label>
+      <input matInput type="number" name="price" [(ngModel)]="product.price">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" style="width: 100%;">
+      <mat-label>Catégorie</mat-label>
+      <input matInput name="category" [(ngModel)]="product.category">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" style="width: 100%;">
+      <mat-label>Image (chemin)</mat-label>
+      <input matInput name="image" [(ngModel)]="product.image" placeholder="Sélectionner un fichier ou saisir le chemin">
+    </mat-form-field>
+
+    <input type="file" (change)="onFileSelected($event)" />
+  </form>
+</div>
+<div mat-dialog-actions align="end" class="dialog-actions">
+  <button mat-button (click)="onNoClick()">Annuler</button>
+  <button mat-button color="primary" [disabled]="!product.name" (click)="save()">Enregistrer</button>
+</div>
