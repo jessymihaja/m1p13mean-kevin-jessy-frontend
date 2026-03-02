@@ -1,6 +1,7 @@
-import { Injectable, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Injectable, Inject, Signal } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +12,12 @@ export class ShopService {
     this.apiBase = apiUrl;
   }
 
-  // données de mock pour client (et admin si besoin).
-  // on fournit un ensemble de boutiques avec descriptions plus longues,
-  // logos fictifs et statut d'approbation. Utile pour affichage stylé.
+  getShopUsers(token: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<any>(`${this.apiBase}/admin/users/role/shop`, { headers });
+  }
   getMockShops(): Observable<any> {
     const fake = [
       {
@@ -56,4 +60,8 @@ export class ShopService {
   deleteShop(shopId: string): Observable<any> {
     return this.http.delete<any>(`${this.apiBase}/shops/${shopId}`);
   }
+  createShopAccount(data: any): Observable<any> {
+    return this.http.post<any>(`${this.apiBase}/shop`, data);
+  }
+  
 }

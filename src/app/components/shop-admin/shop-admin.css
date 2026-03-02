@@ -70,3 +70,54 @@
 .shop-table button.activate-btn:hover {
   background-color: #218838;
 }
+.modal-content {
+  padding: 1rem;
+  width: 600px;
+}
+.form-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.form-row label {
+  flex: 0 0 100px;
+  font-weight: bold;
+}
+.form-row input[type="text"],
+.form-row input[type="email"],
+.form-row input[type="password"] {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+}
+.modal-content h4{
+  margin-top: 0;
+}
+.form-row .error{
+  color: #dc3545;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+}
+.submit-btn {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s;
+  margin-right: 0.2rem;
+}
+.undo-btn {
+  background-color: #6c757d;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s;
+}

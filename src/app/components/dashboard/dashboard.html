@@ -22,18 +22,34 @@
   <!-- Stats Cards -->
   <div class="stats-grid">
     <ng-container *ngIf="isAdmin">
-      <div *ngFor="let stat of adminStats" class="stat-card admin-card">
-        <div class="stat-icon">{{ stat.icon }}</div>
+      <div class="stat-card admin-card">
+        <div class="stat-icon"><mat-icon>group</mat-icon></div>
         <div class="stat-content">
-          <div class="stat-label">{{ stat.label }}</div>
-          <div class="stat-value">{{ stat.value }}</div>
+          <div class="stat-label">Comptes</div>
+          <div class="stat-value">{{ totalUsers }}</div>
         </div>
       </div>
+
+      <div class="stat-card admin-card">
+        <div class="stat-icon"><mat-icon>store</mat-icon></div>
+        <div class="stat-content">
+          <div class="stat-label">Boutiques</div>
+          <div class="stat-value">{{ totalShops }}</div>
+        </div>
+      </div>
+
+      <div class="stat-card admin-card">
+        <div class="stat-icon"><mat-icon>receipt_long</mat-icon></div>
+        <div class="stat-content">
+          <div class="stat-label">Commandes</div>
+          <div class="stat-value">{{ totalOrders }}</div>
+      </div>
+    </div>
     </ng-container>
 
     <ng-container *ngIf="isShop">
       <div *ngFor="let stat of shopStats" class="stat-card shop-card">
-        <div class="stat-icon">{{ stat.icon }}</div>
+        <div class="stat-icon"><mat-icon>{{ stat.icon }}</mat-icon></div>
         <div class="stat-content">
           <div class="stat-label">{{ stat.label }}</div>
           <div class="stat-value">{{ stat.value }}</div>
@@ -43,7 +59,7 @@
 
     <ng-container *ngIf="isClient">
       <div *ngFor="let stat of clientStats" class="stat-card client-card">
-        <div class="stat-icon">{{ stat.icon }}</div>
+        <div class="stat-icon"><mat-icon>{{ stat.icon }}</mat-icon></div>
         <div class="stat-content">
           <div class="stat-label">{{ stat.label }}</div>
           <div class="stat-value">{{ stat.value }}</div>
@@ -122,3 +138,4 @@
     </div>
   </div>
 </div>
+

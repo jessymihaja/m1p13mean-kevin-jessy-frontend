@@ -1,15 +1,107 @@
-<div class="shop-container">
+﻿<div class="shop-container">
   <h3>Gestion des boutiques</h3>
   <div class="shop-controls">
-    <input type="text" [(ngModel)]="searchText" placeholder="Rechercher une boutique...">
-    <button (click)="addShop()">Ajouter une boutique</button>
+    <input type="text" [(ngModel)]="searchText" placeholder="Rechercher une boutique..." />
+    <button (click)="openAddShop()">Ajouter un compte boutique</button>
+    <button (click)="openAddShopForm()">Ajouter une boutique</button>
   </div>
+
+  <!-- modal form -->
+  <div class="modal" *ngIf="showForm">
+    <div class="modal-content">
+      <h4>Nouveau compte boutique</h4>
+      <form [formGroup]="shopForm" (ngSubmit)="submitShop()">
+        <div class="form-row">
+          <label>Nom</label>
+          <input formControlName="name" type="text" />
+          <div class="error" *ngIf="shopForm.get('name')?.touched && shopForm.get('name')?.invalid">
+            Nom requis (min 2)
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label>Email</label>
+          <input formControlName="email" type="email" />
+          <div class="error" *ngIf="shopForm.get('email')?.touched && shopForm.get('email')?.invalid">
+            Email invalide
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label>Mot de passe</label>
+          <input formControlName="password" type="password" />
+          <div class="error" *ngIf="shopForm.get('password')?.touched && shopForm.get('password')?.invalid">
+            Au moins 6 caracteres
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label>Confirmer mot de passe</label>
+          <input formControlName="confirmPassword" type="password" />
+          <div class="error" *ngIf="shopForm.hasError('passwordMismatch') && shopForm.get('confirmPassword')?.touched">
+            Les mots de passe ne correspondent pas
+          </div>
+        </div>
+
+        <button type="submit" [disabled]="shopForm.invalid" class="submit-btn">Creer</button>
+        <button type="button" (click)="showForm=false" class="undo-btn">Annuler</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- modal form for adding a shop -->
+  <div class="modal" *ngIf="showShopForm">
+    <div class="modal-content">
+      <h4>Nouvelle boutique</h4>
+      <form [formGroup]="shopForm2" (ngSubmit)="submitShop2()">
+        <div class="form-row">
+          <label>Nom</label>
+          <input formControlName="name" type="text" />
+          <div class="error" *ngIf="shopForm2.get('name')?.touched && shopForm2.get('name')?.invalid">
+            Nom requis (min 2)
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label>Description</label>
+          <input formControlName="description" type="text" />
+        </div>
+        <div class="form-row">
+          <label>Propriétaire </label>
+          <select formControlName="owner">
+            <option value="" disabled>Choisir un propriétaire</option>
+            <option *ngFor="let user of shopUsers" [value]="user._id">
+              {{ user.name }} ({{ user.email }})
+            </option>
+          </select>
+          <div class="error" *ngIf="shopForm2.get('owner')?.touched && shopForm2.get('owner')?.invalid">
+            Veuillez sélectionner un propriétaire
+          </div>
+        </div>
+        <div class="form-row">
+          <label>Logo de la boutique</label>
+          <input 
+            type="file" 
+            accept="image/*" 
+            (change)="onFileSelected($event)" 
+            #fileInput
+          />
+          
+          <small *ngIf="selectedFileName">{{ selectedFileName }}</small>
+        </div>
+
+        <button type="submit" [disabled]="shopForm2.invalid" class="submit-btn">Creer</button>
+        <button type="button" (click)="showShopForm=false" class="undo-btn">Annuler</button>
+      </form>
+    </div>
+  </div>
+
   <table class="shop-table">
     <thead>
       <tr>
         <th>Nom</th>
         <th>Description</th>
-        <th>Approuvée</th>
+        <th>Approuvee</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -17,11 +109,11 @@
       <tr *ngFor="let s of filteredShops()">
         <td>{{ s.name }}</td>
         <td>{{ s.description }}</td>
-        <td>{{ s.approved ? '✔️' : '✖️' }}</td>
+        <td>{{ s.approved ? 'Oui' : 'Non' }}</td>
         <td>
           <button class="edit-btn" (click)="editShop(s)">Modifier</button>
           <button class="delete-btn" (click)="deleteShop(s._id)">Supprimer</button>
-          <button class="activate-btn" (click)="toggleApprove(s)">{{ s.approved ? 'Désactiver' : 'Activer' }}</button>
+          <button class="activate-btn" (click)="toggleApprove(s)">{{ s.approved ? 'Desactiver' : 'Activer' }}</button>
         </td>
       </tr>
     </tbody>

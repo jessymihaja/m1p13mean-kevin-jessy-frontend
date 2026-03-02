@@ -2,7 +2,7 @@ import { Injectable, signal, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
 
-export type UserRole = 'admin' | 'magasin' | 'buyer' | null;
+export type UserRole = 'admin' | 'shop' | 'buyer' | null;
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +10,13 @@ export type UserRole = 'admin' | 'magasin' | 'buyer' | null;
 export class AuthService {
   private readonly userRoleSignal = signal<UserRole>(this.getRoleFromStorage() || null);
   private readonly tokenSignal = signal<string | null>(this.getTokenFromStorage() || null);
+  private readonly userSignal = signal<any>(null); 
 
   // point the service at the backend API; change if port differs
   private readonly backendUrl: string;
   
   userRole$ = this.userRoleSignal.asReadonly();
+  user$ = this.userSignal.asReadonly();
   token$ = this.tokenSignal.asReadonly();
 
   constructor(private http: HttpClient, @Inject('API_URL') apiUrl: string) {
@@ -88,9 +90,11 @@ export class AuthService {
 
       const role: UserRole = response.user.role || null;
       const token: string = response.token;
+      const user: any = response.user;
 
       this.userRoleSignal.set(role);
       this.tokenSignal.set(token);
+      this.userSignal.set(user);
 
       // sauvegarder localement
       if (role) {
@@ -98,6 +102,9 @@ export class AuthService {
       }
       if (token) {
         localStorage.setItem('authToken', token);
+      }
+      if (user) {
+        localStorage.setItem('user', JSON.stringify(user));
       }
     } catch (error) {
       console.error('Erreur d\'authentification :', error);
@@ -134,6 +141,7 @@ export class AuthService {
       this.tokenSignal.set(null);
       localStorage.removeItem('userRole');
       localStorage.removeItem('authToken');
+      localStorage.removeItem('user');
     }
   }
 }

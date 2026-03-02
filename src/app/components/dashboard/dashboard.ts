@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component ,OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; // needed for ngModel bindings
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { AuthService } from '../../services/auth.service';
+import { Dashboard } from '../../services/dashboard';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,12 +13,29 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css'
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
   userRole: string | null = null;
   showCartPopup: boolean = false;
+  dashboardStats: any = {};
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private dashboardService: Dashboard) {
     this.userRole = this.authService.getUserRole();
+    console.log('Rôle utilisateur dans DashboardComponent:', this.userRole);
+  }
+  ngOnInit(): void {
+    // On récupère le rôle une seconde fois au cas où le constructeur est passé trop vite
+    this.userRole = this.authService.getUserRole();
+    
+    console.log('Vérification rôle au ngOnInit:', this.userRole);
+
+    if (this.isAdmin) {
+      this.loadAdminStats();
+    } else {
+      // Optionnel : un petit délai si ton service auth est asynchrone
+      setTimeout(() => {
+        if (this.isAdmin) this.loadAdminStats();
+      }, 100);
+    }
   }
 
   toggleCart(): void {
@@ -29,20 +47,33 @@ export class DashboardComponent {
   }
 
   get isShop(): boolean {
-    return this.userRole === 'magasin';
+    return this.userRole === 'shop';
   }
 
   get isClient(): boolean {
     return this.userRole === 'buyer';
   }
 
-  // Stats Admin
-  adminStats = [
-    { label: 'Boutiques', value: '24', icon: '🏪' },
-    { label: 'Comptes', value: '156', icon: '👥' },
-    { label: 'Catégories', value: '12', icon: '📂' },
-    { label: 'Revenus', value: '15,420 €', icon: '💰' }
-  ];
+
+
+  totalUsers: number = 0;
+  totalShops: number = 0;
+  totalOrders: number = 0;
+  loadAdminStats(): void {
+    this.dashboardService.getAdminStats().subscribe({
+      next: (data) => {
+        this.totalUsers = data.users || 0;
+        this.totalShops = data.shops || 0;
+        this.totalOrders = data.orders || 0;
+      },
+      error: (err) => {
+        console.error("Erreur de chargement", err);
+        this.totalUsers = 0;
+        this.totalShops = 0;
+        this.totalOrders = 0;
+      }
+    });
+  }
 
   // Stats Magasin
   shopStats = [

@@ -1,32 +1,73 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ShopService } from '../../services/shop';
+import { AuthService, UserRole } from '../../services/auth.service';
 
 @Component({
   selector: 'app-shop-admin',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './shop-admin.html',
   styleUrl: './shop-admin.css'
+  
 })
 export class ShopAdminComponent implements OnInit {
   shops: any[] = [];
+  shopUsers: any[] = [];
   searchText: string = '';
 
-  constructor(private shopService: ShopService) {}
+  showForm = false;
+  showShopForm = false;
+  shopForm: FormGroup;
+  shopForm2: FormGroup;
+
+  selectedFile: File | null = null;
+  selectedFileName: string = '';
+
+  constructor(private shopService: ShopService,private fb: FormBuilder,private auth: AuthService) {
+    this.shopForm = this.fb.group({
+      name: ['', [Validators.required, Validators.minLength(2)]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', Validators.required]
+    }, { validators: this.passwordsMatch });
+    this.shopForm2 = this.fb.group({
+      name: ['', [Validators.required, Validators.minLength(2)]],
+      description: ['', Validators.required],
+      ownerId: ['', Validators.required],
+      logo: ['']
+    });
+  }
 
   ngOnInit(): void {
     this.loadShops();
+    this.loadShopUsers();
   }
 
   loadShops(): void {
-    // données factices pour admin
     this.shopService.getMockShops().subscribe(
       (data) => this.shops = data,
-      (error) => console.error('Erreur récupération shops (mock) :', error)
+      (error) => console.error('Erreur récupération shops:', error)
     );
   }
+  loadShopUsers(): void {
+  const token = this.auth.token$(); 
+  if (!token) {
+    console.warn("En attente du token...");
+    return;
+  }
+
+  this.shopService.getShopUsers(token).subscribe({
+    next: (data) => {
+      console.log('Utilisateurs chargés avec succès :', data);
+      this.shopUsers = data;
+    },
+    error: (err) => {
+      
+      console.error('Erreur API réelle :', err.error.message);
+    }
+  });
+}
 
   filteredShops(): any[] {
     return this.shops.filter(s => 
@@ -35,14 +76,73 @@ export class ShopAdminComponent implements OnInit {
     );
   }
 
-  addShop(): void {
-    const name = prompt('Nom de la boutique');
-    if (!name) return;
-    const newShop: any = { name, description: '', approved: false };
-    this.shopService.addShop(newShop).subscribe(
-      (s) => this.shops.push(s),
-      (err) => console.error('Erreur ajout shop', err)
+  openAddShop(): void {
+    this.showForm = true;
+  }
+  openAddShopForm(): void {
+    this.showShopForm = true;
+  }
+
+  private passwordsMatch(group: FormGroup) {
+    const p = group.get('password')?.value;
+    const c = group.get('confirmPassword')?.value;
+    return p === c ? null : { passwordMismatch: true };
+  }
+
+  submitShop(): void {
+    if (this.shopForm.invalid) {
+      this.shopForm.markAllAsTouched();
+      return;
+    }
+    const { name, email, password } = this.shopForm.value;
+    // register as shop user
+    this.auth.register({ name, email, password, role: 'shop' }).then(
+      (res) => {
+        // Optionnel: on peut ajouter à la liste locale
+        this.shops.push({ _id: res.id || '', name, description: '', approved: false });
+        this.shopForm.reset();
+        this.showForm = false;
+      }
+    ).catch(err => {
+      console.error('Erreur création boutique', err);
+      alert('Impossible de créer la boutique : ' + (err?.error?.message || err.message));
+    });
+  }
+  submitShop2(): void {
+    const formdata = new FormData();
+    formdata.append('name', this.shopForm2.get('name')?.value);
+    formdata.append('description', this.shopForm2.get('description')?.value);
+    formdata.append('owner',this.shopForm2.get('owner')?.value);
+
+    if (this.selectedFile) {
+      formdata.append('logo', this.selectedFile, this.selectedFile.name);
+    }
+    if (this.shopForm2.invalid) {
+      this.shopForm2.markAllAsTouched();
+      return;
+    }
+    this.shopService.createShopAccount(formdata).subscribe(
+      (res) => {
+        this.shops.push(res);
+        this.shopForm2.reset();
+        this.showShopForm = false;
+      },
+      (err) => {
+        console.error('Erreur création boutique', err);
+        alert('Impossible de créer la boutique : ' + (err?.error?.message || err.message));
+      }
     );
+  } 
+  onFileSelected(event: any): void {
+    const file: File = event.target.files[0];
+
+    if (file) {
+      this.selectedFile = file;
+      this.selectedFileName = file.name;
+
+      
+      this.shopForm2.patchValue({ logo: file.name });
+    }
   }
 
   editShop(shop: any): void {
