@@ -33,7 +33,7 @@ export class DashboardComponent {
   }
 
   get isClient(): boolean {
-    return this.userRole === 'client';
+    return this.userRole === 'buyer';
   }
 
   // Stats Admin

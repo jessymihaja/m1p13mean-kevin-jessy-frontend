@@ -43,24 +43,6 @@
             </mat-form-field>
           </div>
 
-          <div class="two-cols">
-            <mat-form-field appearance="outline" class="col">
-                <mat-label>Choose a date</mat-label>
-                <input matInput [matDatepicker]="picker">
-                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-
-            <mat-form-field appearance="outline" class="col">
-              <mat-label>Genre</mat-label>
-              <mat-select formControlName="gender">
-                <mat-option *ngFor="let g of genders" [value]="g">{{ g }}</mat-option>
-              </mat-select>
-              <mat-error *ngIf="registerForm.get('gender')?.invalid && registerForm.get('gender')?.touched">
-                {{ getError('gender') }}
-              </mat-error>
-            </mat-form-field>
-          </div>
 
           <button mat-raised-button color="primary" type="submit" class="register-button" [disabled]="isLoading || registerForm.invalid">
             <span *ngIf="!isLoading">S'inscrire</span>

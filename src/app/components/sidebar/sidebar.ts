@@ -112,7 +112,7 @@ export class SidebarComponent implements OnInit {
       case 'magasin':
         this.menuItems = this.shopMenu;
         break;
-      case 'client':
+      case 'buyer':
         this.menuItems = this.clientMenu;
         break;
       default:
