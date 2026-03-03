@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:3000/api'
+  apiUrl: 'https://mkwoos48ksgw4wog0ks4ko8o.mendrika.dev'
 };
