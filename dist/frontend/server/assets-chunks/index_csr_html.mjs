@@ -1,0 +1,16 @@
+export default `<!doctype html>
+<html lang="en" data-beasties-container="">
+<head><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <meta charset="utf-8">
+  <title>Frontend</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <!-- Google Material Icons -->
+  <style>@font-face{font-family:'Material Icons';font-style:normal;font-weight:400;src:url(https://fonts.gstatic.com/s/materialicons/v145/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');}.material-icons{font-family:'Material Icons';font-weight:normal;font-style:normal;font-size:24px;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';-webkit-font-smoothing:antialiased;}</style>
+<style>:root{--bg:#4facfe;--card-bg:#ffffff;--muted:#6b6f76;--primary:#667eea}html,body{height:100%;background-color:var(--primary);color:#222;font-family:Segoe UI,Tahoma,Geneva,Verdana,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}app-root{min-height:100%;display:block}:root{--mat-datepicker-calendar-body-label-text-color:#667eea;--mat-datepicker-calendar-container-background-color:#f3f6f9}</style><link rel="stylesheet" href="styles-B672IDWP.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="styles-B672IDWP.css"></noscript></head>
+<body ngcm="">
+  <app-root></app-root>
+<script src="main-HXEUTRNV.js" type="module"></script></body>
+</html>
+`;

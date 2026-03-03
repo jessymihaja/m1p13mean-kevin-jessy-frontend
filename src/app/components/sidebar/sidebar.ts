@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService, UserRole } from '../../services/auth.service';
-
+import { Router } from '@angular/router';
 interface MenuItem {
   label: string;
   icon: string;
@@ -94,7 +94,7 @@ export class SidebarComponent implements OnInit {
     }
   ];
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService ,private router: Router) {}
 
   ngOnInit(): void {
     this.userRole = this.authService.getUserRole();
@@ -150,5 +150,6 @@ export class SidebarComponent implements OnInit {
    */
   logout(): void {
     this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }
