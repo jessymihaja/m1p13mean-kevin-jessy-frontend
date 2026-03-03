@@ -93,18 +93,14 @@ export class DashboardComponent implements OnInit {
 
   // Stats Magasin
   shopStats = [
-    { label: 'Articles', value: '120', icon: '📦' },
-    { label: 'Commandes', value: '45', icon: '🛒' },
-    { label: 'Revenus', value: '3,240 €', icon: '💵' },
-    { label: 'Notations', value: '4.8/5', icon: '⭐' }
+    { label: 'Espace', value: 'magasin', icon: '📦' },
+
   ];
 
   // Stats Client
   clientStats = [
-    { label: 'Mon panier', value: '0 €', icon: '🛒' },
-    { label: 'Commandes', value: '5', icon: '📋' },
-    { label: 'Favoris', value: '23', icon: '❤️' },
-    { label: 'Points', value: '540', icon: '⚡' }
+    { label: 'Espace', value: 'Client', icon: '🛒' },
+    { label: 'Articles', value: 'à votre disposition', icon: '📦' },
   ];
 
   // temporary list of articles for client dashboard view
