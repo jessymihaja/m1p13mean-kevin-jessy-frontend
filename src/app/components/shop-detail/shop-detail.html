@@ -1,0 +1,67 @@
+<div class="shop-detail-wrapper" *ngIf="!loading && shop">
+<a href="/client/cart" ><div class="cart-icon mat-cart" routerLink="/client/cart" style="cursor: pointer;">
+    <mat-icon>shopping_cart</mat-icon>
+</div>
+</a>
+  <!-- HEADER MAGASIN -->
+  <div class="shop-header">
+    <div class="shop-avatar">
+      🏪
+    </div>
+    <div class="shop-main-info">
+      <h2>{{ shop.name }}</h2>
+      <p class="shop-description">{{ shop.description }}</p>
+    </div>
+  </div>
+
+  <!-- SECTION PRODUITS -->
+  <div class="products-section">
+    <h3>Produits disponibles</h3>
+
+    <div *ngIf="products.length === 0" class="no-products">
+      Aucun produit disponible pour ce magasin.
+    </div>
+    <div class="product-list">
+      <div *ngFor="let p of products" class="product-card">
+        
+        <div class="product-image" *ngIf="p.image">
+          <img [src]="'assets/images/' + p.image" alt="{{ p.name }}">
+        </div>
+        <div class ="product-shop-name">
+          {{ shop.name }}
+        </div>
+        <div class="product-info">
+          <h4>{{ p.name }}</h4>
+          <p class="product-description">{{ p.description }}</p>
+
+          <div class="product-meta">
+            <span class="price">
+              {{ p.price | currency:'Ar' }}
+            </span>
+            <span class="category">
+              {{ p.category }}
+            </span>
+          </div>
+        </div>
+        <div class="article-actions">
+            <button 
+                mat-icon-button 
+                class="product-icon"
+                title="Ajouter au panier"
+                (click)="openQuantityModal(p)">
+                <mat-icon>shopping_cart</mat-icon>
+            </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div *ngIf="loading" class="loading">
+  Chargement du magasin...
+</div>
+
+<div *ngIf="errorMessage" class="error">
+  {{ errorMessage }}
+</div>

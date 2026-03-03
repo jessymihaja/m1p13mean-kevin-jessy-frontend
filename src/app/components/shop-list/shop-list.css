@@ -12,8 +12,8 @@
 
 .shop-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 3rem;
 }
 
 .shop-card {
@@ -26,6 +26,7 @@
   gap: 1rem;
   padding: 1.25rem;
   min-height: 100px;
+  min-width: 300px;
   transition: transform 0.3s, box-shadow 0.3s;
 }
 .shop-card:hover {
@@ -39,8 +40,8 @@
 }
 
 .shop-image {
-  width: 60px;
-  height: 60px;
+  width: 1560px;
+  height: 160px;
   background: #ddd;
   border-radius: 6px;
   display: flex;
@@ -65,4 +66,13 @@
   color: #666;
   font-style: italic;
   grid-column: 1 / -1;
+}
+.btn-detail {
+  margin-top: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }

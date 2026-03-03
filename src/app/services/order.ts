@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable, Inject } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
@@ -6,7 +7,7 @@ import { Observable, of } from 'rxjs';
 })
 export class OrderService {
   private apiBase: string;
-  constructor(@Inject('API_URL') apiUrl: string) {
+  constructor(@Inject('API_URL') apiUrl: string ,private http: HttpClient) {
     this.apiBase = apiUrl;
   }
 
@@ -33,5 +34,8 @@ export class OrderService {
       }
     ];
     return of(fake);
+  }
+  createOrder(orderData: any): Observable<any> {
+    return this.http.post(`${this.apiBase}/buyer/orders`, orderData);
   }
 }

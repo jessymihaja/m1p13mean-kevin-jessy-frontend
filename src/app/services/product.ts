@@ -10,8 +10,6 @@ export class ProductService {
   constructor(private http: HttpClient, @Inject('API_URL') apiUrl: string) {
     this.apiBase = apiUrl;
   }
-
-  // données de démonstration utilisables avant connexion au backend
   getMockProducts(): Observable<any> {
     const fake = [
       { _id: '1', name: 'T-shirt bleu', description: 'Coton 100%', price: 19.99, category: 'Habillement' },
@@ -21,13 +19,19 @@ export class ProductService {
     return of(fake);
   }
 
-  getProducts(): Observable<any> {
-    return this.http.get<any>(`${this.apiBase}/products`);
+  getProducts(ownerId:string): Observable<any> {
+    return this.http.get<any>(`${this.apiBase}/shop/products/${ownerId}`);
+  }
+  getProductByShopId(shopId: string): Observable<any> {
+    return this.http.get<any>(`${this.apiBase}/buyer/shops/${shopId}/products`);
   }
 
-  addProduct(data: any): Observable<any> {
-    return this.http.post<any>(`${this.apiBase}/products`, data);
-  }
+  addProduct(ownerId: string, productData: any): Observable<any> {
+  return this.http.post<any>(
+    `${this.apiBase}/shop/products/${ownerId}`,
+    productData 
+  );
+}
 
   updateProduct(productId: string, data: any): Observable<any> {
     return this.http.put<any>(`${this.apiBase}/products/${productId}`, data);

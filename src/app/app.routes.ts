@@ -7,6 +7,8 @@ import { InventoryComponent } from './components/inventory/inventory';
 import { OrderComponent } from './components/order/order';
 import { ShopAdminComponent } from './components/shop-admin/shop-admin';
 import { ShopListComponent } from './components/shop-list/shop-list';
+import { ShopDetailComponent } from './components/shop-detail/shop-detail';
+import { CartComponent } from './components/cart/cart';
 
 export const routes: Routes = [
   // Auth routes
@@ -31,9 +33,12 @@ export const routes: Routes = [
   { path: 'shop/inventory', component: InventoryComponent },
   { path: 'shop/orders', component: OrderComponent },
 
+
   // Client routes
   { path: 'client/home', component: DashboardComponent },
   { path: 'client/search', component: DashboardComponent },
   { path: 'client/shops', component: ShopListComponent },
-  { path: 'client/orders-history', component: DashboardComponent }
+    { path: 'client/shop/:id', component: ShopDetailComponent },
+  { path: 'client/orders-history', component: DashboardComponent },
+  { path: 'client/cart', component: CartComponent }
 ];

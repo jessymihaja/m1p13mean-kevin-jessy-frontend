@@ -1,0 +1,76 @@
+/* Conteneur principal du dialogue */
+h2[mat-dialog-title] {
+  margin: 0;
+  padding: 20px 24px;
+  background-color: #f8f9fa; /* Gris très léger pour le titre */
+  color: #333;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  border-bottom: 1px solid #eee;
+}
+
+/* Zone de contenu */
+div[mat-dialog-content] {
+  padding: 24px !important;
+  color: #555;
+  line-height: 1.6;
+}
+
+div[mat-dialog-content] p {
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+  color: #2c3e50;
+}
+
+
+mat-form-field {
+  margin-top: 10px;
+}
+
+
+div[mat-dialog-actions] {
+  padding: 16px 24px !important;
+  border-top: 1px solid #eee;
+  gap: 12px; 
+}
+
+
+button[mat-button] {
+  padding: 8px 20px;
+  border-radius: 8px;
+  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+/* Bouton Annuler */
+button[mat-button]:not([color="primary"]) {
+  color: #7f8c8d;
+}
+
+button[mat-button]:not([color="primary"]):hover {
+  background-color: #f1f1f1;
+}
+
+button[color="primary"] {
+  background-color: #3f51b5; /* Bleu Material */
+  color: white !important;
+  box-shadow: 0 4px 6px rgba(63, 81, 181, 0.2);
+}
+
+button[color="primary"]:hover {
+  background-color: #303f9f;
+  box-shadow: 0 6px 12px rgba(63, 81, 181, 0.3);
+  transform: translateY(-1px);
+}
+
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  opacity: 1; 
+}
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  border-radius: 16px !important; /* Des bords bien arrondis */
+  overflow: hidden; /* Pour que le header gris respecte l'arrondi */
+}

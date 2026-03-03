@@ -14,20 +14,20 @@
       <th>Actions</th>
     </tr>
   </thead>
-  <tbody>
-    <tr *ngFor="let p of filteredProducts()">
-      <td>{{ p.name }}</td>
-      <td>{{ p.description }}</td>
-      <td>{{ p.price | currency:'EUR' }}</td>
-      <td>{{ p.category }}</td>
-      <td>
-        <button class="promo-btn" mat-icon-button color="accent" title="Promouvoir" (click)="promoteProduct(p)">
-          <mat-icon>emoji_events</mat-icon>
-        </button>
-        <button class="edit-btn" (click)="editProduct(p)">Modifier</button>
-        <button class="delete-btn" (click)="deleteProduct(p._id)">Supprimer</button>
-      </td>
-    </tr>
-  </tbody>
+  <tbody *ngIf="products && products.length > 0">
+  <tr *ngFor="let p of filteredProducts()">
+    <td>{{ p.name }}</td>
+    <td>{{ p.description }}</td>
+    <td>{{ p.price | currency:'Ar' }}</td>
+    <td>{{ p.category }}</td>
+    <td>
+      <button class="promo-btn" mat-icon-button color="accent" title="Promouvoir" (click)="promoteProduct(p)">
+        <mat-icon>emoji_events</mat-icon>
+      </button>
+      <button class="edit-btn" (click)="editProduct(p)">Modifier</button>
+      <button class="delete-btn" (click)="deleteProduct(p._id)">Supprimer</button>
+    </td>
+  </tr>
+</tbody>
 </table>
 </div>

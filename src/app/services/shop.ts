@@ -12,11 +12,8 @@ export class ShopService {
     this.apiBase = apiUrl;
   }
 
-  getShopUsers(token: string): Observable<any> {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    });
-    return this.http.get<any>(`${this.apiBase}/admin/users/role/shop`, { headers });
+  getShopUsers(): Observable<any> {
+    return this.http.get<any>(`${this.apiBase}/admin/users/role/shop`);
   }
   getMockShops(): Observable<any> {
     const fake = [
@@ -46,7 +43,7 @@ export class ShopService {
   }
 
   getShops(): Observable<any> {
-    return this.http.get<any>(`${this.apiBase}/shops`);
+    return this.http.get<any>(`${this.apiBase}/buyer/shops`);
   }
 
   addShop(data: any): Observable<any> {
@@ -60,8 +57,11 @@ export class ShopService {
   deleteShop(shopId: string): Observable<any> {
     return this.http.delete<any>(`${this.apiBase}/shops/${shopId}`);
   }
-  createShopAccount(data: any): Observable<any> {
-    return this.http.post<any>(`${this.apiBase}/shop`, data);
-  }
+ createShopAccount(data: any): Observable<any> {
+  return this.http.post<any>(`${this.apiBase}/shop`, data);
+}
+getShopById(shopId: string): Observable<any> {
+  return this.http.get<any>(`${this.apiBase}/shop/${shopId}`);
+}
   
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
@@ -12,6 +12,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { ProductService } from '../../services/product';
 import { AddProductDialogComponent } from './add-product-dialog';
 import { PromoteProductDialogComponent } from './promote-product-dialog';
+import { AuthService} from '../../services/auth.service';
+import { StorageService } from '../../services/storageService';
 
 @Component({
   selector: 'app-inventory',
@@ -35,31 +37,30 @@ export class InventoryComponent implements OnInit {
   products: any[] = [];
   searchText: string = '';
 
-  constructor(private productService: ProductService, private dialog: MatDialog) {}
+  constructor(private cd : ChangeDetectorRef, private productService: ProductService, private dialog: MatDialog,private authService: AuthService,private storageService: StorageService) {}
 
-  ngOnInit(): void {
-    this.loadProducts();
+  ngOnInit() {
+  const userStr = this.storageService.getItem('user');
+  const ownerId = userStr ? JSON.parse(userStr).id : null;
+  
+  if (ownerId) {
+    this.productService.getProducts(ownerId).subscribe(
+  (data) => {
+    this.products = data;
+    console.log('Produits chargés avec succès :', data);
+    this.cd.detectChanges(); // injecte ChangeDetectorRef
+  },
+  (error) => console.error(error)
+);
   }
+}
 
-  loadProducts(): void {
-    // utiliser les données factices tant que le backend n'est pas prêt
-    this.productService.getMockProducts().subscribe(
-      (data) => {
-        this.products = data;
-      },
-      (error) => {
-        console.error('Erreur lors de la récupération des produits (mock) :', error);
-      }
-    );
-
-    // quand l'API sera disponible, remplacer par :
-    // this.productService.getProducts()...
-  }
 
   filteredProducts(): any[] {
     return this.products.filter(p => 
       p.name.toLowerCase().includes(this.searchText.toLowerCase()) ||
-      p.description.toLowerCase().includes(this.searchText.toLowerCase())
+      p.description.toLowerCase().includes(this.searchText.toLowerCase())||
+      p.price.toString().includes(this.searchText)
     );
   }
 
@@ -72,12 +73,16 @@ export class InventoryComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.productService.addProduct(result).subscribe(
+        const ownerid = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')!).id : null;
+        this.productService.addProduct(ownerid,result).subscribe(
           (p) => {
+
             this.products.push(p);
           },
           (error) => {
             console.error('Erreur ajout produit', error);
+            console.log('Données envoyées :', result);
+            console.log('Owner ID :', ownerid);
           }
         );
       }

@@ -44,12 +44,12 @@ export class AddProductDialogComponent {
   onFileSelected(event: any): void {
     if (event.target.files && event.target.files.length) {
       const file = event.target.files[0];
-      // store filename/path - backend expects a string path
       this.product.image = file.name;
     }
   }
 
   save(): void {
     this.dialogRef.close(this.product);
+
   }
 }
