@@ -46,7 +46,7 @@ export class ShopAdminComponent implements OnInit {
   }
 
   loadShops(): void {
-    this.shopService.getMockShops().subscribe(
+    this.shopService.getShopsForAdmin().subscribe(
       (data) => this.shops = data,
       (error) => console.error('Erreur récupération shops:', error)
     );
@@ -54,7 +54,6 @@ export class ShopAdminComponent implements OnInit {
   loadShopUsers(): void {
   this.shopService.getShopUsers().subscribe({
     next: (data) => {
-      console.log('Utilisateurs chargés avec succès :', data);
       this.shopUsers = data.users || [];
     },
     error: (err) => {

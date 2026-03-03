@@ -38,4 +38,7 @@ export class OrderService {
   createOrder(orderData: any): Observable<any> {
     return this.http.post(`${this.apiBase}/buyer/orders`, orderData);
   }
+  getOrdersByUser(userId: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiBase}/buyer/orders/${userId}`);
+  }
 }

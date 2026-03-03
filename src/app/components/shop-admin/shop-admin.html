@@ -101,7 +101,7 @@
       <tr>
         <th>Nom</th>
         <th>Description</th>
-        <th>Approuvee</th>
+        <th>Status</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -109,11 +109,9 @@
       <tr *ngFor="let s of filteredShops()">
         <td>{{ s.name }}</td>
         <td>{{ s.description }}</td>
-        <td>{{ s.approved ? 'Oui' : 'Non' }}</td>
+        <td>{{ s.status === 'approved' ? 'Approuvée' : 'En attente' }}</td>
         <td>
-          <button class="edit-btn" (click)="editShop(s)">Modifier</button>
-          <button class="delete-btn" (click)="deleteShop(s._id)">Supprimer</button>
-          <button class="activate-btn" (click)="toggleApprove(s)">{{ s.approved ? 'Desactiver' : 'Activer' }}</button>
+          <button class="activate-btn" (click)="toggleApprove(s)">{{ s.status === 'approved' ? 'Desactiver' : 'Activer' }}</button>
         </td>
       </tr>
     </tbody>

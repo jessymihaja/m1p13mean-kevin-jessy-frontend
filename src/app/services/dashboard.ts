@@ -22,5 +22,7 @@ getAdminStats(): Observable<any> {
 
     return this.http.get<any>(`${this.apiBase}/admin/dashboard`, { headers });
 }
-
+getAllProducts(): Observable<any> {
+  return this.http.get<any>(`${this.apiBase}/buyer/products`);
+}
 };

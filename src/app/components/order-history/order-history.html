@@ -1,0 +1,38 @@
+<div class="order-history-container">
+  <h2>Historique des commandes</h2>
+
+  <div *ngIf="loading" class="loading">Chargement des commandes...</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <div *ngIf="!loading && orders.length === 0" class="no-orders">
+    Vous n'avez passé aucune commande.
+  </div>
+
+  <div *ngFor="let order of orders" class="order-card">
+    <div class="order-header">
+      <span>Commande #{{ order._id }}</span>
+      <span>Status: <strong>{{ order.status == 'pending' ? 'En attente' : 'Traitée' }}</strong></span>
+      <span>Méthode de livraison: {{ order.deliveryMethod == 'pickup' ? 'Retrait en magasin' : 'Livraison à domicile' }}</span>
+    </div>
+    <table class="order-products">
+      <thead>
+        <tr>
+          <th>Produit</th>
+          <th>Prix</th>
+          <th>Quantité</th>
+          <th>Sous-total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of order.products">
+          <td>{{ p.product.name }}</td>
+          <td>{{ p.product.price | currency:'Ar' }}</td>
+          <td>{{ p.quantity }}</td>
+          <td>{{ (p.product.price * p.quantity) | currency:'Ar' }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <span class="total ">Total: {{ order.totalPrice | currency:'Ar' }}</span>
+  </div>
+</div>

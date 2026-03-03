@@ -45,6 +45,9 @@ export class ShopService {
   getShops(): Observable<any> {
     return this.http.get<any>(`${this.apiBase}/buyer/shops`);
   }
+  getShopsForAdmin(): Observable<any> {
+    return this.http.get<any>(`${this.apiBase}/admin/shops`);
+  }
 
   addShop(data: any): Observable<any> {
     return this.http.post<any>(`${this.apiBase}/shops`, data);

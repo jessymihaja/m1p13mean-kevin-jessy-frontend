@@ -9,6 +9,7 @@ import { ShopAdminComponent } from './components/shop-admin/shop-admin';
 import { ShopListComponent } from './components/shop-list/shop-list';
 import { ShopDetailComponent } from './components/shop-detail/shop-detail';
 import { CartComponent } from './components/cart/cart';
+import { OrderHistoryComponent } from './components/order-history/order-history';
 
 export const routes: Routes = [
   // Auth routes
@@ -39,6 +40,6 @@ export const routes: Routes = [
   { path: 'client/search', component: DashboardComponent },
   { path: 'client/shops', component: ShopListComponent },
     { path: 'client/shop/:id', component: ShopDetailComponent },
-  { path: 'client/orders-history', component: DashboardComponent },
-  { path: 'client/cart', component: CartComponent }
+  { path: 'client/cart', component: CartComponent },
+  { path: 'client/orders-history', component: OrderHistoryComponent }
 ];

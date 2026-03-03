@@ -5,6 +5,19 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { AuthService } from '../../services/auth.service';
 import { Dashboard } from '../../services/dashboard';
+import { MatDialog } from '@angular/material/dialog';
+import { QuantityDialogComponent } from '../quantity-dialog/quantity-dialog';
+interface Product {
+  _id: string;
+  name: string;
+  description: string;
+  price: number;
+  category: string;
+  image?: string;
+  shop: {
+    name: string;
+  }
+}
 
 @Component({
   selector: 'app-dashboard',
@@ -18,7 +31,7 @@ export class DashboardComponent implements OnInit {
   showCartPopup: boolean = false;
   dashboardStats: any = {};
 
-  constructor(private authService: AuthService, private dashboardService: Dashboard) {
+  constructor(private authService: AuthService, private dashboardService: Dashboard , private dialog: MatDialog) {
     this.userRole = this.authService.getUserRole();
     console.log('Rôle utilisateur dans DashboardComponent:', this.userRole);
   }
@@ -35,6 +48,9 @@ export class DashboardComponent implements OnInit {
       setTimeout(() => {
         if (this.isAdmin) this.loadAdminStats();
       }, 100);
+    }
+    if (this.isClient) {
+      this.loadProducts();
     }
   }
 
@@ -95,40 +111,51 @@ export class DashboardComponent implements OnInit {
   searchText: string = '';
   sortOption: 'recent' | 'best' | 'old' = 'recent';
 
-  articles = [
-    { title: 'Chaussures de course', description: 'Confortables et légères', date: new Date(2026, 1, 25), rating: 4.5 },
-    { title: 'Montre connectée', description: 'Suivez votre activité au quotidien', date: new Date(2026, 0, 10), rating: 4.8 },
-    { title: 'Casque audio', description: 'Isolation phonique supérieure', date: new Date(2025, 11, 5), rating: 4.2 },
-    { title: 'Sac à dos', description: 'Résistant à l’eau et ergonomique', date: new Date(2026, 1, 5), rating: 4.6 }
-  ];
+  articles: Product[] = [];
 
   filteredArticles() {
     let list = this.articles
       .filter(a =>
-        a.title.toLowerCase().includes(this.searchText.toLowerCase()) ||
+        a.name.toLowerCase().includes(this.searchText.toLowerCase()) ||
         a.description.toLowerCase().includes(this.searchText.toLowerCase())
       );
-
-    switch (this.sortOption) {
-      case 'recent':
-        list = list.sort((a, b) => b.date.getTime() - a.date.getTime());
-        break;
-      case 'old':
-        list = list.sort((a, b) => a.date.getTime() - b.date.getTime());
-        break;
-      case 'best':
-        list = list.sort((a, b) => b.rating - a.rating);
-        break;
-    }
-
     return list;
   }
-
-  viewArticle(article: any): void {
-    alert(`Voir article : ${article.title}`);
+  loadProducts(): void {
+    this.dashboardService.getAllProducts().subscribe({
+      next: (data) => {
+        this.articles = data || [];
+        console.log('Articles chargés pour client:', this.articles);
+      }
+    });
   }
 
-  addToCart(article: any): void {
-    alert(`Article ajouté au panier : ${article.title}`);
+  openQuantityModal(product: any) {
+      const dialogRef = this.dialog.open(QuantityDialogComponent, {
+          width: '300px',
+          data: product
+      });
+  
+      dialogRef.afterClosed().subscribe(quantity => {
+          if (quantity && quantity > 0) {
+          this.addToCart(product, quantity);
+          }
+      }); 
+      }
+      addToCart(product: any, quantity: number) {
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+  
+    const existingProduct = cart.find((item: any) => item._id === product._id);
+  
+    if (existingProduct) {
+      existingProduct.quantity += quantity;
+    } else {
+      cart.push({
+        ...product,
+        quantity: quantity
+      });
+    }
+  
+    localStorage.setItem('cart', JSON.stringify(cart));
   }
 }
